@@ -1,0 +1,104 @@
+﻿@model Passion_231.Models.ViewModels.UpdateEmployee
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2 style="padding: 30px 30px;">Update Employee</h2>
+
+
+
+<div class="form-horizontal">
+    <div>
+        <div style="width:59%; margin-right:2%; float:left;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.employee.EmployeeID, new { Name = "EmployeeID" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.employee.EmployeeFirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.employee.EmployeeFirstName, new { htmlAttributes = new { @class = "form-control", Name = "EmployeeFirstName" } })
+                        @Html.ValidationMessageFor(model => model.employee.EmployeeFirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.employee.EmployeeLastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.employee.EmployeeLastName, new { htmlAttributes = new { @class = "form-control", Name = "EmployeeLastName" } })
+                        @Html.ValidationMessageFor(model => model.employee.EmployeeLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.employee.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.employee.HireDate, new { htmlAttributes = new { @class = "form-control", Name = "HireDate" } })
+                        @Html.ValidationMessageFor(model => model.employee.HireDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.employee.EmployeeBio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.employee.EmployeeBio, new { htmlAttributes = new { @class = "form-control", Name = "EmployeeBio" } })
+                        @Html.ValidationMessageFor(model => model.employee.EmployeeBio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div style="width:39%; margin: 0 auto; float:left;">
+            <h4>Assigned Departments:</h4>
+            <div>
+                @foreach (var department in Model.employeeddepartments)
+                {
+                    <div>
+                        @Html.ActionLink(
+                        department.DepartmentName,
+                        "Details",
+                        "Department",
+                        new { id = department.DepartmentID },
+                        new { })
+
+                        @Html.ActionLink(
+                       "[x]",
+                       "Unemployee",
+                       "Employee",
+                       new { departmentid = department.DepartmentID, employeeid = Model.employee.EmployeeID },
+                       new { @class = "text-danger" })
+                    </div>
+                }
+            </div>
+            <div>
+                <h3>Department list:</h3>
+                <div>
+                    <form method="POST" action="/Employee/Employee">
+                        <select name="DepartmentID">
+                            @foreach (var department in Model.alldepartments)
+                            {
+                                <option value="@department.DepartmentID">@department.DepartmentName</option>
+                            }
+                        </select>
+                        <input type="number" name="EmployeeID" value="@Model.employee.EmployeeID" style="display:none;" />
+                        <input type="submit" value="Employee Department" />
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

@@ -1,0 +1,138 @@
+﻿.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e6e2d3;
+    margin-top: 1px;
+}
+
+/*h2, h3, h4{
+    padding-top: 20px;
+}*/
+
+.record {
+    /*4 column layout*/
+    width: 22%;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    float: left;
+    position: relative;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+._record {
+    padding: 20px;
+}
+
+.recordtitle {
+    text-align: center;
+    margin-top: 15px;
+}
+
+th {
+    background-color: lightseagreen;
+    color: black;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color:darkgoldenrod;
+}
+
+img {
+    height: 175px;
+    
+}
+
+.imagecontainer {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+
+    .imagecontainer.featured {
+        max-width: 175px;
+    }
+
+    .imagecontainer img {
+        width: 100%;
+    }
+
+.linknav {
+    overflow: hidden;
+    font-size: 10px;
+}
+
+    .linknav:after {
+        clear: both;
+    }
+
+.editlink {
+    float: right;
+}
+
+.record-container {
+    overflow: hidden;
+    padding: 10px;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+footer {
+    padding-top: 50px;
+}
+
+/*feel free to change any of the bootstrap classes*/
+.navbar-inverse {
+    margin-top: 1px;
+    border-radius: 0px;
+    background: #c4b7a6;
+}
+
+    .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
+        color: #181818;
+        font-weight: 400;
+    }
+
+
+@media screen and (max-width:700px) {
+    /*change to two column*/
+    .record {
+        width: 48%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    /*change to one column*/
+    .record {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Passion_231.Models.PetDto>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<head>
+    @Styles.Render("~/Content/css")
+</head>
+
+<h2>Pets</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="paginate">
+    @{
+        int PrevPage = Convert.ToInt32(ViewData["PageNum"]) - 1;
+        int NextPage = Convert.ToInt32(ViewData["PageNum"]) + 1;
+        @Html.ActionLink("Prev", "List", new { PageNum = PrevPage })
+        @ViewData["PageSummary"]
+        @Html.ActionLink("Next", "List", new { PageNum = NextPage })
+    }
+</div>
+<div class="record-container">
+    @foreach (var pet in Model)
+    {
+        <div class="record">
+            <div class="_record">
+                @{
+                    //Use server rendering to determine an image
+                    string pic = "/Content/Pets/default.jpg";
+                    string alt = "No Profile Picture Provided.";
+                    if (pet.PetHasPic)
+                    {
+                        pic = "/Content/Pets/" + pet.PetID + "." + pet.PicExtension;
+                        alt = "Profile shot of " + pet.PetName ;
+                    }
+                }
+                <nav class="linknav">
+                    <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = pet.PetID })</span>
+                </nav>
+                <div class="imagecontainer">
+                    <a data-lightbox="pet-@pet.PetID" href="@pic" data-title="@alt">
+                        <img src="@pic" alt="@alt" />
+                    </a>
+                </div>
+                <div class="recordtitle">
+                    @Html.ActionLink(pet.PetName,
+                   "Details",
+                   new { id = pet.PetID })
+                </div>
+
+
+            </div>
+        </div>
+    }
+</div>
+

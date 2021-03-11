@@ -1,0 +1,57 @@
+﻿@model Passion_231.Models.ViewModels.ShowPet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Pet Details</h4>
+
+<div>
+    <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.Pet.PetID })</div>
+    <hr />
+    @{
+        //Use server rendering to determine an image
+        string pic = "/Content/Pets/default.jpg";
+        string alt = "No Profile Picture Provided.";
+        if (Model.Pet.PetHasPic)
+        {
+            pic = "/Content/Pets/" + Model.Pet.PetID + "." + Model.Pet.PicExtension;
+            alt = "Profile shot of " + Model.Pet.PetName;
+        }
+    }
+    <div class="imagecontainer featured">
+        <img src="@pic" alt="@alt" />
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pet.PetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pet.PetType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pet.PetAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pet.PetWeight)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
+        </dt>
+        <dd>
+            @Html.ActionLink(Model.Department.DepartmentName, "Details", "Department", new { id = Model.Department.DepartmentID }, new { })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Pet.PetID }) |
+    @Html.ActionLink("Back to List", "List")
+</p>
+

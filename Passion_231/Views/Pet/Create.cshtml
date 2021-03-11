@@ -1,0 +1,75 @@
+﻿@model Passion_231.Models.ViewModels.UpdatePet
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+@using (Html.BeginForm())
+{
+    //This will set a hidden input field with value "_RequestVerificationToken"
+    //The PetController Create Method will look for this token
+    //This helps secure the Create() method from being called from other pages.
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Pet</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pet.PetName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pet.PetName, new { htmlAttributes = new { @class = "form-control", Name = "PetName" } })
+            @Html.ValidationMessageFor(model => model.pet.PetName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pet.PetType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pet.PetType, new { htmlAttributes = new { @class = "form-control", Name = "PetType" } })
+            @Html.ValidationMessageFor(model => model.pet.PetType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pet.PetAge, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pet.PetAge, new { htmlAttributes = new { @class = "form-control", Name = "PetAge" } })
+            @Html.ValidationMessageFor(model => model.pet.PetAge, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.pet.PetWeight, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pet.PetWeight, new { htmlAttributes = new { @class = "form-control", Name = "PetWeight" } })
+            @Html.ValidationMessageFor(model => model.pet.PetWeight, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pet.DepartmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select name="DepartmentID">
+                @foreach (var department in Model.alldepartments)
+                {
+                    <option value="@department.DepartmentID">@department.DepartmentName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+

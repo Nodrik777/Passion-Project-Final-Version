@@ -1,0 +1,43 @@
+﻿@model Passion_231.Models.PetDto
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<h3>Are you sure you want to delete this pet?</h3>
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PetType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PetAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PetWeight)
+        </dd>
+
+        
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Pet", new { id = Model.PetID }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "List")
+        </div>
+    }
+</div>
+

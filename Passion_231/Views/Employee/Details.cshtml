@@ -1,0 +1,51 @@
+﻿@model Passion_231.Models.ViewModels.UpdateEmployee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Employee @Model.employee.EmployeeFirstName @Model.employee.EmployeeLastName</h4>
+
+<div>
+    <div style="padding-top : 20px;">@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.employee.EmployeeID })</div>    
+    <div style="overflow:hidden;">
+        <div style="float:left; margin-right:2%; width:49%;">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.employee.EmployeeFirstName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.employee.EmployeeLastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.employee.HireDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.employee.EmployeeBio)
+                </dd>
+
+            </dl>
+        </div>
+        <div style="float:left; margin-right:0%; width:49%;">
+            <h4>Departments assigned:</h4>
+            <div>
+                @foreach (var team in Model.employeeddepartments)
+                {
+                    <div>
+                        @Html.ActionLink(
+                        team.DepartmentName,
+                        "Details",
+                        "Department",
+                        new { id = team.DepartmentID},
+                        new { })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.employee.EmployeeID }) |
+    @Html.ActionLink("Back to List", "List")
+</p>
